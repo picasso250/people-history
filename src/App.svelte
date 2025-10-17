@@ -193,6 +193,11 @@
 </script>
 
 <main>
+    <header class="project-header">
+        <h1>People's History</h1>
+        <h2>众语史书</h2>
+    </header>
+
     {#if view === 'form'}
         <div class="altar">
             <textarea 
@@ -236,7 +241,7 @@
         </div>
     {/if}
 
-    <!-- ========== 新增：最近铭刻 ========== -->
+    <!-- ========== 最近铭刻 ========== -->
     <section class="recent-inscriptions">
         <h3>最近铭刻</h3>
         {#if recentInscriptions.length > 0}
