@@ -26,8 +26,7 @@
             <p>这意味着，包括我们自己在内，全世界<strong>没有任何人</strong>可以修改、暂停或删除这个合约。它将成为一个在Arbitrum网络上自主运行的公共设施，直到网络本身消亡。</p>
             <p class="verification">
                 <strong>状态:</strong> <span class="status-done">已完成</span> <br>
-                <!-- TODO: Replace with the actual tx hash for renouncing ownership -->
-                <strong>验证交易:</strong> 暂未执行此操作
+                <strong>验证交易:</strong> <a href="https://arbiscan.io/tx/0xbde3d6831ae46730872567b1e6866a7def1c41f3ca00566fcaf3a97343f94b48" target="_blank" rel="noopener noreferrer" class="tx-link">0xbde3d6831ae46730872567b1e6866a7def1c41f3ca00566fcaf3a97343f94b48</a>
             </p>
         </section>
 
@@ -78,6 +77,7 @@
         padding: 1rem;
         font-family: monospace;
         line-height: 1.6;
+        word-break: break-all;
     }
     .status-done {
         color: var(--success-color);
@@ -88,5 +88,12 @@
         padding: 0.2em 0.4em;
         border-radius: 3px;
         font-family: monospace;
+    }
+    .tx-link {
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+    .tx-link:hover {
+        text-decoration: underline;
     }
 </style>
