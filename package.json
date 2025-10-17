@@ -1,0 +1,15 @@
+{
+  "name": "history-reader",
+  "version": "1.0.0",
+  "description": "A script to read event logs from the People's History smart contract.",
+  "main": "read_history.js",
+  "type": "module",
+  "scripts": {
+    "start": "node read_history.js"
+  },
+  "dependencies": {
+    "ethers": "^6.13.1"
+  },
+  "author": "",
+  "license": "ISC"
+}
