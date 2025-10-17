@@ -5,6 +5,11 @@
         if (!address) return '';
         return `${address.slice(0, 6)}...${address.slice(-4)}`;
     }
+
+    function formatTxHash(hash) {
+        if (!hash) return '';
+        return `${hash.slice(0, 8)}...${hash.slice(-6)}`;
+    }
     
     function formatDate(timestamp) {
         return new Date(timestamp * 1000).toLocaleString();
@@ -16,12 +21,19 @@
     {#if inscriptions.length > 0}
         {#each inscriptions as item (item.transactionHash)}
             <div class="inscription-card">
-                <p class="inscription-content">"{item.content}"</p>
-                <div class="inscription-meta">
-                    <span>{formatDate(item.timestamp)}</span>
-                    <a href={`https://arbiscan.io/address/${item.author}`} target="_blank" rel="noopener noreferrer">
-                        by: {formatAddress(item.author)}
+                <div class="meta-top">
+                    <span class="timestamp">{formatDate(item.timestamp)}</span>
+                    <a class="tx-link" href={`https://arbiscan.io/tx/${item.transactionHash}`} target="_blank" rel="noopener noreferrer">
+                       Tx: {formatTxHash(item.transactionHash)}
                     </a>
+                </div>
+
+                <p class="inscription-content">"{item.content}"</p>
+                
+                <div class="meta-bottom">
+                    <span class="author" title={item.author}>
+                        by: {formatAddress(item.author)}
+                    </span>
                 </div>
             </div>
         {/each}
@@ -52,16 +64,19 @@
       padding: 1.25rem;
       margin-bottom: 1rem;
       animation: fadeIn 0.5s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
 
     .inscription-content {
       font-size: 1.1rem;
       white-space: pre-wrap;
       word-wrap: break-word;
-      margin-bottom: 1rem;
+      margin: 0; /* Reset margin */
     }
 
-    .inscription-meta {
+    .meta-top, .meta-bottom {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -70,12 +85,39 @@
       font-family: monospace;
     }
 
-    .inscription-meta a {
-      color: var(--accent-color);
-      text-decoration: none;
+    .meta-bottom {
+        justify-content: flex-end;
     }
 
-    .inscription-meta a:hover {
+    .tx-link {
+      color: var(--accent-color);
+      text-decoration: none;
+      padding: 0.3rem 0.5rem;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .tx-link:hover {
       color: var(--primary-color);
+      border-color: var(--accent-color);
+      background-color: #2a2a2a;
+    }
+
+    /* --- Mobile Responsive --- */
+    @media (max-width: 600px) {
+        .inscription-card {
+            gap: 0.75rem;
+        }
+
+        .meta-top {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .meta-bottom {
+            margin-top: 0.5rem;
+        }
     }
 </style>
