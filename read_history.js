@@ -1,5 +1,6 @@
 import { ethers } from "ethers";
-import abi from "./ABI.json" assert { type: "json" };
+// 【已修正】将 'assert' 关键字替换为 'with'，以兼容新版 Node.js
+import abi from "./ABI.json" with { type: "json" };
 
 // --- 配置区 ---
 
