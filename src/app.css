@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap');
+
+:root {
+  --background-color: #121212;
+  --text-color: #E0E0E0;
+  --primary-color: #BDBDBD;
+  --accent-color: #4A4A4A;
+  --success-color: #A5D6A7;
+  --font-family: 'Noto Serif SC', serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--font-family);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+}
+
+#app {
+  width: 100%;
+  max-width: 720px;
+  padding: 2rem;
+}
+
+.altar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.verse-box {
+  background-color: #1A1A1A;
+  border: 1px solid var(--accent-color);
+  border-radius: 4px;
+  color: var(--text-color);
+  font-family: var(--font-family);
+  font-size: 1.1rem;
+  padding: 1rem;
+  min-height: 200px;
+  resize: vertical;
+  width: 100%;
+}
+
+.verse-box:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.inscribe-button {
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 50px;
+}
+
+.inscribe-button:hover:not(:disabled) {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+}
+
+.inscribe-button:disabled {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  cursor: not-allowed;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.success-view {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.success-view h2 {
+  font-size: 1.8rem;
+  color: var(--success-color);
+}
+
+.tx-hash-wrapper {
+  background-color: #1A1A1A;
+  padding: 1rem;
+  border-radius: 4px;
+  border: 1px solid var(--accent-color);
+  word-break: break-all;
+  position: relative;
+}
+
+.tx-hash {
+  font-family: monospace;
+  color: var(--primary-color);
+}
+
+.copy-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: var(--accent-color);
+  border: none;
+  color: var(--text-color);
+  padding: 5px 8px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.arbiscan-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--primary-color);
+}
+
+footer {
+  position: fixed;
+  bottom: 1rem;
+  width: 100%;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--accent-color);
+}
+
+footer a {
+    color: var(--accent-color);
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+footer a:hover {
+    color: var(--primary-color);
+}
+
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
