@@ -5,6 +5,8 @@
     import snapshotData from './lib/history_snapshot.json';
     import Altar from './lib/Altar.svelte';
     import RecentInscriptions from './lib/RecentInscriptions.svelte';
+    import Origin from './lib/Origin.svelte';
+    import Commitment from './lib/Commitment.svelte';
 
     // --- 配置区 ---
     const contractAddress = "0xC415e346Ebb297Cf849E2323702C97E6DC01bee7";
@@ -25,7 +27,8 @@
     let readonlyContract = new ethers.Contract(contractAddress, abi, readonlyProvider);
 
     let account = null;
-    let view = "form"; // 'form', 'success'
+    let mainView = "form"; // 'form', 'success'
+    let pageView = "main"; // 'main', 'origin', 'commitment'
     let statusMessage = "铭刻 (Inscribe)";
     let txHash = "";
     let errorMessage = "";
@@ -144,8 +147,8 @@
             const receipt = await tx.wait();
             
             txHash = receipt.hash;
-            view = "success";
-            altarComponent.view = "success"; // Directly update child's exported `view` prop
+            mainView = "success";
+            altarComponent.view = "success"; 
 
             fetchLiveInscriptions();
 
@@ -161,35 +164,44 @@
     }
 
     function handleReset() {
-        view = "form";
+        mainView = "form";
         txHash = "";
         errorMessage = "";
     }
 </script>
 
-<main>
-    <header class="project-header">
-        <h1>People's History</h1>
-        <h2>众语史书</h2>
-    </header>
+{#if pageView === 'main'}
+    <main>
+        <header class="project-header">
+            <h1>People's History</h1>
+            <h2>众语史书</h2>
+        </header>
 
-    <Altar 
-        bind:this={altarComponent}
-        {isLoading}
-        {account}
-        {statusMessage}
-        {errorMessage}
-        {txHash}
-        on:inscribe={handleInscribe}
-        on:reset={handleReset}
-    />
+        <Altar 
+            bind:this={altarComponent}
+            view={mainView}
+            {isLoading}
+            {account}
+            {statusMessage}
+            {errorMessage}
+            {txHash}
+            on:inscribe={handleInscribe}
+            on:reset={handleReset}
+        />
 
-    <RecentInscriptions inscriptions={recentInscriptions} />
+        <RecentInscriptions inscriptions={recentInscriptions} />
 
-</main>
+    </main>
 
-<footer>
-    <a href="#">我们的承诺</a>
-    <span>&bull;</span>
-    <a href="#">阅览室</a>
-</footer>
+    <footer>
+        <a href="javascript:void(0);" on:click={() => pageView = 'origin'}>缘起</a>
+        <span>&bull;</span>
+        <a href="javascript:void(0);" on:click={() => pageView = 'commitment'}>我们的承诺</a>
+    </footer>
+
+{:else if pageView === 'origin'}
+    <Origin on:close={() => pageView = 'main'} />
+
+{:else if pageView === 'commitment'}
+    <Commitment on:close={() => pageView = 'main'} />
+{/if}
