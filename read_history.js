@@ -23,14 +23,27 @@ async function main() {
     const contract = new ethers.Contract(contractAddress, abi, provider);
 
     console.log(`已连接到合约: ${await contract.getAddress()}`);
-    console.log("正在从创世区块开始，获取所有的 'Record' 事件...\n");
-
+    
     try {
-        // 查询从区块 0 到最新区块的所有 'Record' 事件
-        const events = await contract.queryFilter("Record", 0, "latest");
+        // --- 优化：只查询最近24小时的事件 ---
+        // 1. 获取最新区块号
+        const latestBlockNumber = await provider.getBlockNumber();
+        console.log(`当前最新区块: ${latestBlockNumber}`);
+
+        // 2. 计算大约24小时前的区块号
+        // Sepolia 测试网平均出块时间约为 12 秒
+        // 每天的秒数 = 24 * 60 * 60 = 86400 秒
+        // 每天的区块数 ≈ 86400 / 12 = 7200 个区块
+        const blocksIn24Hours = 7200;
+        const startBlock = Math.max(0, latestBlockNumber - blocksIn24Hours); // 使用Math.max确保区块号不为负
+
+        console.log(`正在从区块 ${startBlock} 开始，获取最近24小时内的 'Record' 事件...\n`);
+
+        // 3. 查询从计算出的起始区块到最新区块的所有 'Record' 事件
+        const events = await contract.queryFilter("Record", startBlock, "latest");
 
         if (events.length === 0) {
-            console.log("✅ 在此合约中未找到任何 'Record' 事件。");
+            console.log("✅ 在最近24小时内未找到任何 'Record' 事件。");
             return;
         }
 
