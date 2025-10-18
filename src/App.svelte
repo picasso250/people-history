@@ -175,6 +175,9 @@
         <header class="project-header">
             <h1>People's History</h1>
             <h2>众语史书</h2>
+            <div class="network-indicator">
+                <span>运行于 Arbitrum 网络</span>
+            </div>
         </header>
 
         <Altar 

@@ -40,6 +40,19 @@ html, body {
   color: var(--text-color);
 }
 
+.network-indicator {
+  margin-top: 1.5rem;
+  display: inline-block;
+  border-radius: 4px;
+  padding: 0.3rem 0.8rem;
+}
+
+.network-indicator span {
+  font-size: 0.9rem;
+  color: var(--accent-color);
+  font-weight: 400;
+}
+
 #app {
   width: 100%;
   max-width: 720px;
