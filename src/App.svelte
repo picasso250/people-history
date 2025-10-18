@@ -171,7 +171,7 @@
 </script>
 
 {#if pageView === 'main'}
-    <main>
+    <main id="app">
         <header class="project-header">
             <h1>People's History</h1>
             <h2>众语史书</h2>
@@ -194,9 +194,11 @@
     </main>
 
     <footer>
-        <a href="javascript:void(0);" on:click={() => pageView = 'origin'}>缘起</a>
+        <button on:click={() => pageView = 'origin'}>缘起</button>
         <span>&bull;</span>
-        <a href="javascript:void(0);" on:click={() => pageView = 'commitment'}>我们的承诺</a>
+        <button on:click={() => pageView = 'commitment'}>我们的承诺</button>
+        <span>&bull;</span>
+        <a href="https://github.com/picasso250/people-history" target="_blank" rel="noopener noreferrer">GitHub</a>
     </footer>
 
 {:else if pageView === 'origin'}
