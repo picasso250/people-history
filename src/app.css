@@ -43,19 +43,22 @@ html, body {
 #app {
   width: 100%;
   max-width: 720px;
-  padding: 2rem 2rem 6rem; /* Add padding-bottom for footer */
+  /* 移除了底部的 6rem padding，不再需要为 fixed footer 预留空间 */
+  padding: 2rem;
   margin: 0 auto;
 }
 
 footer {
-  position: fixed;
-  bottom: 1rem;
-  left: 0;
-  right: 0;
+  /* --- 关键改动 --- */
+  /* 移除了 position: fixed 和相关的 bottom, left, right 属性 */
+  /* 现在它是一个正常的、位于文档流末尾的静态页脚 */
   width: 100%;
   text-align: center;
   font-size: 0.9rem;
   color: var(--accent-color);
+  padding: 2rem 0; /* 增加一些垂直内边距 */
+  margin-top: 4rem; /* 与上方内容区域的间距 */
+  border-top: 1px solid var(--accent-color); /* 添加一个顶部分隔线，视觉上更清晰 */
 }
 
 footer a, footer button {
