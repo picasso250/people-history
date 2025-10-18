@@ -28,7 +28,7 @@
                     </a>
                 </div>
 
-                <p class="inscription-content">"{item.content}"</p>
+                <p class="inscription-content">{item.content}</p>
                 
                 <div class="meta-bottom">
                     <span class="author" title={item.author}>
