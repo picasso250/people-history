@@ -171,7 +171,7 @@
 </script>
 
 {#if pageView === 'main'}
-    <main id="app">
+    <main>
         <header class="project-header">
             <h1>People's History</h1>
             <h2>众语史书</h2>
